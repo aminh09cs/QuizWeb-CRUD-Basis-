@@ -1,37 +1,28 @@
 import React from 'react';
+import UserInfo from './UserInfo';
 class MyComponent extends React.Component {
     state = {
         name: 'Minh',
         age: 22
     };
-    handleClick(e) {
-        console.log("Ok", this.state.name);
-        this.setState({
-            name: 'Anh Minh',
-        })
-    }
-    handleOnchange = (e) => {
+    handleOnchangeName = (e) => {
         this.setState({
             name: e.target.value
         })
     }
+    handleOnchangeAge = (e) => {
+        this.setState({
+            age: e.target.value
+        })
+    }
     handleOnSubmit = (e) => {
-        e.preventDefault();
-        alert("ok");
-
+        e.preventDefault()
     }
     //JSX
     render() {
         return (
             <div>
-                My name is {this.state.name} and age {this.state.age};
-                <form onSubmit={(e) => this.handleOnSubmit(e)}>
-                    <input
-                        type="text"
-                        onChange={(e) => this.handleOnchange(e)}
-                    />
-                    <button>Submit</button>
-                </form>
+                <UserInfo />
             </div>
         );
     }
