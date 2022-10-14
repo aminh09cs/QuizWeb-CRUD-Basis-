@@ -1,28 +1,29 @@
 import React from 'react';
+import DisplayInfo from './DisplayInfo';
 import UserInfo from './UserInfo';
 class MyComponent extends React.Component {
     state = {
-        name: 'Minh',
-        age: 22
-    };
-    handleOnchangeName = (e) => {
+        listUsers: [
+            { id: 1, name: "Minh", age: 17 },
+            { id: 2, name: "Tuan", age: 24 },
+            { id: 3, name: "Hai", age: 25 },
+        ]
+    }
+    handleAddNewUser = (userObj) => {
         this.setState({
-            name: e.target.value
+            listUsers: [userObj, ...this.state.listUsers]
         })
     }
-    handleOnchangeAge = (e) => {
-        this.setState({
-            age: e.target.value
-        })
-    }
-    handleOnSubmit = (e) => {
-        e.preventDefault()
-    }
-    //JSX
     render() {
         return (
             <div>
-                <UserInfo />
+                <UserInfo
+                    handleAddNewUser={this.handleAddNewUser}
+                />
+                <br />
+                <DisplayInfo
+                    listUsers={this.state.listUsers}
+                />
             </div>
         );
     }

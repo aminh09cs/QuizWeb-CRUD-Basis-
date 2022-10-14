@@ -1,8 +1,9 @@
+//ADD USER
 import React from 'react';
 class UserInfo extends React.Component {
     state = {
-        name: 'Minh',
-        age: 22
+        name: '',
+        age: '',
     };
     handleOnchangeName = (e) => {
         this.setState({
@@ -16,7 +17,11 @@ class UserInfo extends React.Component {
     }
     handleOnSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        this.props.handleAddNewUser({
+            id: Math.floor(Math.random() * (100) + 1) + '_x',
+            name: this.state.name,
+            age: this.state.age
+        });
     }
     render() {
         return (
