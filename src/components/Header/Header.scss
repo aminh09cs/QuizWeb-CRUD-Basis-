@@ -1,0 +1,15 @@
+.header-container{
+    .navbar-nav{
+        .nav-link{
+            width: 100px;
+            text-align: center;
+            transition: all .5s;
+            &.active{
+                color: #ff00a2;
+            }
+            &:hover{
+                transform: scale(1.2);
+            }
+        }
+    }
+}
