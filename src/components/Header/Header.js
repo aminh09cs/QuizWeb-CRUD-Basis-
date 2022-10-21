@@ -4,7 +4,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link, NavLink } from 'react-router-dom'
-import './Header.scss';
 let Logo = require('../../Img/global.png');
 
 const Header = () => {
@@ -22,11 +21,13 @@ const Header = () => {
                         <NavLink to="/admin" className='nav-link'>Admin</NavLink>
                     </Nav>
                     <Nav>
-                        <NavDropdown title="Settings" id="basic-nav-dropdown">
+                        <button className='btn-login'>Log In</button>
+                        <button className='btn-signup'>Sign Up</button>
+                        {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
                             <NavDropdown.Item>Log in</NavDropdown.Item>
                             <NavDropdown.Item>Log out</NavDropdown.Item>
                             <NavDropdown.Item>Profile</NavDropdown.Item>
-                        </NavDropdown>
+                        </NavDropdown> */}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
