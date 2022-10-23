@@ -9,6 +9,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import User from './components/User/User';
 import Admin from './components/Admin/Admin';
 import Home from './components/Home/Home';
+import Community from './components/Community/Community';
+import About from './components/About/About';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +20,9 @@ root.render(
         <Route path="/" element={<App />} >
           <Route index element={<Home />} />
           <Route path="users" element={<User />} />
+          <Route path="community" element={<Community />} />
+          <Route path="about" element={<About />} />
+
         </Route>
         <Route path="admin" element={<Admin />} />
       </Routes>

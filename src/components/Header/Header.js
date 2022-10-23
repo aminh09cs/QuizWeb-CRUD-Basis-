@@ -19,6 +19,8 @@ const Header = () => {
                         <NavLink to="/" className='nav-link'>Home</NavLink>
                         <NavLink to="/users" className='nav-link'>Users</NavLink>
                         <NavLink to="/admin" className='nav-link'>Admin</NavLink>
+                        <NavLink to="/community" className='nav-link'>Community</NavLink>
+                        <NavLink to="/about" className='nav-link'>About</NavLink>
                     </Nav>
                     <Nav>
                         <button className='btn-login'>Log In</button>

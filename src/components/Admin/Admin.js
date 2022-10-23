@@ -1,6 +1,6 @@
 import SideBar from "./SideBar";
 import './Admin.scss';
-import { FaBars } from 'react-icons/fa';
+import { ImMenu } from 'react-icons/im'
 import { useState } from "react";
 const Admin = (props) => {
     const [collapsed, setCollapsed] = useState(false);
@@ -10,7 +10,15 @@ const Admin = (props) => {
                 <SideBar collapsed={collapsed} />
             </div>
             <div className="admin-content">
-                <FaBars onClick={() => setCollapsed(!collapsed)} /> {/* css or fontawesome */}
+                <ImMenu
+                    onClick={() => setCollapsed(!collapsed)}
+                    style={{
+                        fontSize: '20px',
+                        position: 'relative',
+                        left: '-29px',
+                        zIndex: '10000'
+                    }}
+                /> {/* css or fontawesome */}
                 ss
             </div>
         </div>
