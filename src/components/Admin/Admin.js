@@ -2,6 +2,7 @@ import SideBar from "./SideBar";
 import './Admin.scss';
 import { ImMenu } from 'react-icons/im'
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 const Admin = (props) => {
     const [collapsed, setCollapsed] = useState(false);
     return (
@@ -13,13 +14,15 @@ const Admin = (props) => {
                 <ImMenu
                     onClick={() => setCollapsed(!collapsed)}
                     style={{
-                        fontSize: '20px',
+                        fontSize: '30px',
                         position: 'relative',
                         left: '-29px',
-                        zIndex: '10000'
+                        zIndex: '10000',
                     }}
                 /> {/* css or fontawesome */}
-                ss
+                <div className="admin-main">
+                    <Outlet /> {/* Manage User, Quiz, Question */}
+                </div>
             </div>
         </div>
     )

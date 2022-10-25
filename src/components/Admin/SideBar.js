@@ -4,6 +4,7 @@ import { SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar'
 import { DiReact } from 'react-icons/di'
 import { TbDashboard } from 'react-icons/tb'
 import { AiOutlineFire } from 'react-icons/ai'
+import { Link, NavLink } from 'react-router-dom'
 
 const SideBar = (props) => {
     const { collapsed } = props;
@@ -38,14 +39,18 @@ const SideBar = (props) => {
                             icon={<TbDashboard />}
                         >
                             Dashboard
+                            <NavLink to="/admin" />
                         </MenuItem>
                     </Menu>
                     <Menu>
                         <SubMenu
                             icon={<AiOutlineFire />}
-                            title={"Challenge"}
+                            title={"Data"}
                         >
-                            <MenuItem>Users</MenuItem>
+                            <MenuItem>
+                                Users
+                                <NavLink to="/admin/manage-user" />
+                            </MenuItem>
                             <MenuItem>Quiz</MenuItem>
                             <MenuItem>Question</MenuItem>
                         </SubMenu>

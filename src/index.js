@@ -11,6 +11,8 @@ import Admin from './components/Admin/Admin';
 import Home from './components/Home/Home';
 import Community from './components/Community/Community';
 import About from './components/About/About';
+import ManageUser from './components/Admin/Content/ManageUser';
+import DashBoard from './components/Admin/Content/DashBoard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,9 +24,11 @@ root.render(
           <Route path="users" element={<User />} />
           <Route path="community" element={<Community />} />
           <Route path="about" element={<About />} />
-
         </Route>
-        <Route path="admin" element={<Admin />} />
+        <Route path="admin" element={<Admin />} >
+          <Route index element={<DashBoard />} />
+          <Route path="manage-user" element={<ManageUser />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </Provider >
