@@ -2,6 +2,8 @@ import ModalCreateUser from './ModalCreateUser';
 import './ManageUser.scss';
 import { BsFillPlusCircleFill } from 'react-icons/bs'
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ManageUser = (props) => {
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
     return (
@@ -25,7 +27,19 @@ const ManageUser = (props) => {
                     show={showModalCreateUser}
                     setShow={setShowModalCreateUser}
                 />
-
+                {/* toast */}
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
             </div>
         </div>
     )

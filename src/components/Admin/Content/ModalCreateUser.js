@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlineFolderAdd } from "react-icons/ai";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const ModalCreateUser = (props) => {
     const { show, setShow } = props;
@@ -27,8 +28,25 @@ const ModalCreateUser = (props) => {
     const handleChangeImage = (e) => {
         setpreImage(URL.createObjectURL(e.target.files[0]));
         setImage(e.target.files[0]);
+        //setImage in state
     }
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
     const handleSubmit = async () => {
+        const isValidEmail = validateEmail(email);
+        if (!isValidEmail) {
+            toast.error("Email isn't valid");
+            return;
+        }
+        if (!password || password.length < 8) {
+            toast.error("Password isn't valid");
+            return;
+        }
 
         const data = new FormData();
         data.append('email', email);
@@ -38,7 +56,10 @@ const ModalCreateUser = (props) => {
         data.append('userImage', image);
 
         let res = await axios.post('http://localhost:8081/api/v1/participant', data)
-        console.log(res)
+        if (res.data && res.data.EC === 0) {
+            toast.success("Complete");
+            handleClose();
+        }
     }
 
     return (
