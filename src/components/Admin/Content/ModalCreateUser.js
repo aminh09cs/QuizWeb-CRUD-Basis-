@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlineFolderAdd } from "react-icons/ai";
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import { postNewUser } from '../../serviceBE/apiService'
 
 const ModalCreateUser = (props) => {
     const { show, setShow } = props;
@@ -48,16 +48,15 @@ const ModalCreateUser = (props) => {
             return;
         }
 
-        const data = new FormData();
-        data.append('email', email);
-        data.append('password', password);
-        data.append('username', username);
-        data.append('role', username);
-        data.append('userImage', image);
 
-        let res = await axios.post('http://localhost:8081/api/v1/participant', data)
-        if (res.data && res.data.EC === 0) {
+
+        let data = await postNewUser(email, password, username, role);
+        if (data && data.EC === 0) {
             toast.success("Complete");
+            handleClose();
+        }
+        if (data && data.EC === 1) {
+            toast.error(data.EM);
             handleClose();
         }
     }
