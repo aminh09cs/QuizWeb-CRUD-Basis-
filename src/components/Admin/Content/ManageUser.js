@@ -1,11 +1,24 @@
 import ModalCreateUser from './ModalCreateUser';
 import './ManageUser.scss';
 import { BsFillPlusCircleFill } from 'react-icons/bs'
-import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TableUser from './TableUser';
+import { getAllUsers } from "../../serviceBE/apiService";
+import { useEffect, useState } from "react";
+
 const ManageUser = (props) => {
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+    const [listUsers, setListUsers] = useState([]);
+    useEffect(() => {
+        fetchListUsers();
+    }, []);
+    const fetchListUsers = async () => {
+        let res = await getAllUsers();
+        if (res.EC === 0) {
+            setListUsers(res.DT);
+        }
+    }
     return (
         <div className="manage-user container-fluid">
             <div
@@ -21,11 +34,15 @@ const ManageUser = (props) => {
                     <button className='btn btn-success' onClick={() => setShowModalCreateUser(true)}><BsFillPlusCircleFill /> Add New User</button>
                 </div>
                 <div className='manage-user-table'>
-                    table
+                    <TableUser
+                        listUsers={listUsers}
+
+                    />
                 </div>
                 <ModalCreateUser
                     show={showModalCreateUser}
                     setShow={setShowModalCreateUser}
+                    fetchListUsers={fetchListUsers}
                 />
             </div>
             <ToastContainer

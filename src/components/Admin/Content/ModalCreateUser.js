@@ -5,7 +5,7 @@ import { AiOutlineFolderAdd } from "react-icons/ai";
 import { toast } from 'react-toastify';
 import { postNewUser } from '../../serviceBE/apiService'
 
-const ModalCreateUser = (props) => {
+export const ModalCreateUser = (props) => {
     const { show, setShow } = props;
 
     const handleClose = () => {
@@ -24,7 +24,6 @@ const ModalCreateUser = (props) => {
     const [role, setRole] = useState("user");
     const [image, setImage] = useState("");
     const [prevImage, setpreImage] = useState("");
-
     const handleChangeImage = (e) => {
         setpreImage(URL.createObjectURL(e.target.files[0]));
         setImage(e.target.files[0]);
@@ -49,18 +48,18 @@ const ModalCreateUser = (props) => {
         }
 
 
-
         let data = await postNewUser(email, password, username, role);
         if (data && data.EC === 0) {
             toast.success("Complete");
             handleClose();
+            await props.fetchListUsers();
         }
+        //check error in axios. Code error: EC: data same other
         if (data && data.EC === 1) {
             toast.error(data.EM);
             handleClose();
         }
     }
-
     return (
         <>
             {/* <Button variant="primary" onClick={handleShow}>
