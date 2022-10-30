@@ -6,9 +6,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import TableUser from './TableUser';
 import { getAllUsers } from "../../serviceBE/apiService";
 import { useEffect, useState } from "react";
+import ModalUpdateUser from './ModalUpdateUser';
 
 const ManageUser = (props) => {
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+    const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+    const [userUpdate, setUserUpdate] = useState({});
     const [listUsers, setListUsers] = useState([]);
     useEffect(() => {
         fetchListUsers();
@@ -18,6 +21,13 @@ const ManageUser = (props) => {
         if (res.EC === 0) {
             setListUsers(res.DT);
         }
+    }
+    const handleClickUpdate = (item) => {
+        setShowModalUpdateUser(true);
+        setUserUpdate(item);
+    }
+    const resetUserUpdate = () => {
+        setUserUpdate({});
     }
     return (
         <div className="manage-user container-fluid">
@@ -36,6 +46,7 @@ const ManageUser = (props) => {
                 <div className='manage-user-table'>
                     <TableUser
                         listUsers={listUsers}
+                        handleClickUpdate={handleClickUpdate}
 
                     />
                 </div>
@@ -43,6 +54,13 @@ const ManageUser = (props) => {
                     show={showModalCreateUser}
                     setShow={setShowModalCreateUser}
                     fetchListUsers={fetchListUsers}
+                />
+                <ModalUpdateUser
+                    show={showModalUpdateUser}
+                    setShow={setShowModalUpdateUser}
+                    userUpdate={userUpdate}
+                    fetchListUsers={fetchListUsers}
+                    resetUserUpdate={resetUserUpdate}
                 />
             </div>
             <ToastContainer

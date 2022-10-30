@@ -30,7 +30,12 @@ const TableUser = (props) => {
                                         gap: '10px',
                                         justifyContent: 'center'
                                     }}>
-                                        <button className="btn btn-success">Update</button>
+                                        <button
+                                            className="btn btn-success"
+                                            onClick={() => props.handleClickUpdate(item)}
+                                        >
+                                            Update
+                                        </button>
                                         <button className="btn btn-danger">View</button>
                                         <button className="btn btn-warning">Delete</button>
                                     </td>
