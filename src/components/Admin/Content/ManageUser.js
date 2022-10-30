@@ -7,11 +7,20 @@ import TableUser from './TableUser';
 import { getAllUsers } from "../../serviceBE/apiService";
 import { useEffect, useState } from "react";
 import ModalUpdateUser from './ModalUpdateUser';
+import ModalViewUser from './ModalViewUser';
+import ModalDeleteUser from './ModalDeleteUser';
 
 const ManageUser = (props) => {
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+    const [showModalViewUser, setShowModalViewUser] = useState(false);
+    const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
+
+
     const [userUpdate, setUserUpdate] = useState({});
+    const [userView, setUserView] = useState({});
+    const [userDelete, setUserDelete] = useState({});
+
     const [listUsers, setListUsers] = useState([]);
     useEffect(() => {
         fetchListUsers();
@@ -25,6 +34,14 @@ const ManageUser = (props) => {
     const handleClickUpdate = (item) => {
         setShowModalUpdateUser(true);
         setUserUpdate(item);
+    }
+    const handleClickView = (item) => {
+        setShowModalViewUser(true);
+        setUserView(item);
+    }
+    const handleClickDelete = (item) => {
+        setShowModalDeleteUser(true);
+        setUserDelete(item);
     }
     const resetUserUpdate = () => {
         setUserUpdate({});
@@ -47,6 +64,8 @@ const ManageUser = (props) => {
                     <TableUser
                         listUsers={listUsers}
                         handleClickUpdate={handleClickUpdate}
+                        handleClickView={handleClickView}
+                        handleClickDelete={handleClickDelete}
 
                     />
                 </div>
@@ -61,6 +80,17 @@ const ManageUser = (props) => {
                     userUpdate={userUpdate}
                     fetchListUsers={fetchListUsers}
                     resetUserUpdate={resetUserUpdate}
+                />
+                <ModalViewUser
+                    show={showModalViewUser}
+                    setShow={setShowModalViewUser}
+                    userView={userView}
+                />
+                <ModalDeleteUser
+                    show={showModalDeleteUser}
+                    setShow={setShowModalDeleteUser}
+                    userDelete={userDelete}
+
                 />
             </div>
             <ToastContainer
