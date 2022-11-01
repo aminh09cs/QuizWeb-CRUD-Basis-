@@ -26,4 +26,7 @@ const deleteUsers = (userid) => {
 const postLogin = (email, password) => {
     return axios.post('api/v1/login', { email, password });
 }
-export { postNewUser, getAllUsers, putUpdateUser, deleteUsers, postLogin }
+const postRegister = (email, password, username) => {
+    return axios.post('api/v1/register', { email, password, username });
+}
+export { postNewUser, getAllUsers, putUpdateUser, deleteUsers, postLogin, postRegister }

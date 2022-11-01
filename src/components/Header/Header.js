@@ -11,6 +11,9 @@ const Header = () => {
     const handleLogin = () => {
         navigate("/login");
     }
+    const handleSignUp = () => {
+        navigate('/register')
+    }
     return (
         <Navbar bg="light" expand="lg">
             <Container>
@@ -27,11 +30,20 @@ const Header = () => {
                         <NavLink to="/about" className='nav-link'>About</NavLink>
                     </Nav>
                     <Nav>
-                        <button className='btn-login' onClick={() => handleLogin()}>
+                        <button
+                            className='btn-login'
+                            onClick={() => handleLogin()}
+                        >
                             {/* use navlink to /.... sure */}
                             Log In
                         </button>
-                        <button className='btn-signup'>Sign Up</button>
+                        <button
+                            className='btn-signup'
+                            onClick={() => handleSignUp()}
+
+                        >
+                            Sign Up
+                        </button>
                         {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
                             <NavDropdown.Item>Log in</NavDropdown.Item>
                             <NavDropdown.Item>Log out</NavDropdown.Item>

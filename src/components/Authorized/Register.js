@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import './Login.scss';
+import './Register.scss';
 import { useNavigate } from 'react-router-dom';
-import { postLogin } from '../serviceBE/apiService';
+import { postLogin, postRegister } from '../serviceBE/apiService';
 import { toast } from 'react-toastify';
-const Login = (props) => {
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+const Register = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
+
+    const [isShowPassword, setIsShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const validateEmail = (email) => {
@@ -16,7 +20,7 @@ const Login = (props) => {
             );
     };
 
-    const handleLogin = async () => {
+    const handleRegister = async () => {
         const isValidEmail = validateEmail(email);
         if (!isValidEmail) {
             toast.error("INVALID EMAIL");
@@ -26,11 +30,16 @@ const Login = (props) => {
             toast.error("INVALID PASSWORD");
             return;
         }
-        let data = await postLogin(email, password);
-        console.log(data)
+        if (!username) {
+            toast.error("INVALID USERNAME");
+            return;
+        }
+
+        let data = await postRegister(email, password, username);
+        //console.log(data)
         if (data && data.EC === 0) {
-            toast.success("Login Success");
-            navigate('/');
+            toast.success("Register Success");
+            navigate('/login');
         }
         //check error in axios. Code error: EC: data same other
         if (data && data.EC !== 0) {
@@ -38,14 +47,14 @@ const Login = (props) => {
         }
     }
     return (
-        <div className="login-container">
+        <div className="register-container">
             <div className="header">
-                <span>Sign up here!!</span>
-                <button onClick={() => navigate('/register')}>Sign Up</button>
+                <span>Login here!!</span>
+                <button onClick={() => navigate('/login')}>Login</button>
             </div>
             <div className="content">
                 <div className="title">
-                    LOGIN
+                    REGISTER
                 </div>
                 <div className="welcome">
                     Hello, New User
@@ -62,25 +71,52 @@ const Login = (props) => {
                         >
                         </input>
                     </div>
-                    <div className="form-group mb-4">
+                    <div className="form-group mb-4 form-password">
                         <label>Password</label>
                         <input
-                            type={"password"}
+                            type={isShowPassword ? "text" : "password"}
                             className="form-control"
                             placeholder="At least 8 characters"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         >
+                        </input>
+                        {
+                            isShowPassword ?
+                                <span
+                                    className='eye'
+                                    onClick={() => setIsShowPassword(false)}
+                                >
+                                    <AiFillEye />
+                                </span>
+                                :
+                                <span
+                                    className='eye'
+                                    onClick={() => setIsShowPassword(true)}
+                                >
+                                    <AiFillEyeInvisible />
+                                </span>
 
+                        }
+                    </div>
+                    <div className="form-group mb-4">
+                        <label>Username</label>
+                        <input
+                            type={"text"}
+                            className="form-control"
+                            placeholder="Le Anh Minh"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        >
                         </input>
                     </div>
                     <div className="mb-2">Forgot Password</div>
                     <div>
                         <button
                             className="btn btn-success btn-login"
-                            onClick={() => handleLogin()}
+                            onClick={() => handleRegister()}
                         >
-                            Login
+                            Sign Up
                         </button>
                     </div>
                     <div
@@ -95,4 +131,4 @@ const Login = (props) => {
         </div>
     )
 }
-export default Login;
+export default Register;
