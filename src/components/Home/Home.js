@@ -1,5 +1,9 @@
 import Video from '../../Img/ocean_beach_coast_shore_turquoise_1082.mp4'
+import { useSelector } from 'react-redux';
 const Home = () => {
+    const userInfo = useSelector(state => state.user.userInfo);
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+
     return (
         <div className="home-container">
             <div className='home-content'>
