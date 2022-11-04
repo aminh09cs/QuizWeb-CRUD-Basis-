@@ -1,8 +1,9 @@
 import Video from '../../Img/ocean_beach_coast_shore_turquoise_1082.mp4'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 const Home = () => {
-    const userInfo = useSelector(state => state.user.userInfo);
     const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+    const navigate = useNavigate();
 
     return (
         <div className="home-container">
@@ -11,12 +12,20 @@ const Home = () => {
                     Ask what you like
                 </div>
                 <div className='home-slogan'>
-                    Everything you want is here. Learn and explore them
+                    Test your abilities now
                 </div>
                 <div className='home-started'>
-                    <button>
-                        Get's started
-                    </button>
+                    {
+                        isAuthenticated === false
+                            ?
+                            <button onClick={() => navigate('/login')}>
+                                Get's started
+                            </button>
+                            :
+                            <button onClick={() => navigate('/users')}>
+                                Doing Quiz Now
+                            </button>
+                    }
                 </div>
             </div>
             <video width="500px" height="500px" controls >
