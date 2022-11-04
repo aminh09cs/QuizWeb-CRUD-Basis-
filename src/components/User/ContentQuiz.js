@@ -2,12 +2,15 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getDataQuiz } from "../serviceBE/apiService";
 import _ from "lodash";
+import './ContentQuiz.scss'
+import { useLocation } from "react-router-dom";
 const ContentQuiz = (props) => {
     const params = useParams();
     const quizID = params.id;
+    const location = useLocation();
+    console.log(location);
     //const {id} = useParams();
     //const quizID = id;
-    console.log(params.id)
     useEffect(() => {
         fletchQuestionQuiz();
     }, [quizID]);
@@ -34,12 +37,36 @@ const ContentQuiz = (props) => {
                 }
                 )
                 .value()
-            console.log("data", data);
         }
     }
     return (
-        <div>
-            QUIZZZZ
+        <div className="content-quiz-container container">
+            <div className="left-content">
+                <div className="content-title">
+                    {location?.state?.quizTitle ? `MINI TEST ${quizID}` : "QUIZ"}
+                </div>
+                <div className="content-body">
+                    Image
+                </div>
+                <div className="content-main">
+                    <div className="content-question">
+                        How many are there in room?
+                    </div>
+                    <div className="content-answer">
+                        <div>A. SO</div>
+                        <div>B. 40</div>
+                        <div>C. SO</div>
+                        <div>D. SO</div>
+                    </div>
+                </div>
+                <div className="content-footer">
+                    <button className="btn-back">BACK</button>
+                    <button className="btn-next">NEXT</button>
+                </div>
+            </div>
+            <div className="right-content">
+                s
+            </div>
         </div>
     )
 }

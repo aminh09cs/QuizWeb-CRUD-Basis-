@@ -25,7 +25,7 @@ const ListQuiz = (props) => {
                             <div className="card-body">
                                 <h5 className="card-title">Quiz Test {index + 1}</h5>
                                 {/* <p className="card-text">{item.description}</p> */}
-                                <a href="#" className="btn btn-primary" onClick={() => navigate(`/quiz/${item.id}`)}>Start Quiz</a>
+                                <a href="#" className="btn btn-primary" onClick={() => navigate(`/quiz/${item.id}`, { state: { quizTitle: item.description } })}>Start Quiz</a>
                             </div>
                         </div>
                     )
