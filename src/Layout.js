@@ -42,7 +42,7 @@ const Layout = (props) => {
                     <Route path="community" element={<Community />} />
                     <Route path="about" element={<About />} />
                 </Route>
-                <Route path="/quiz/:id" element={<ContentQuiz />} />
+                <Route path="quiz/:id" element={<ContentQuiz />} />
                 <Route path="users" element={<ListQuiz />} />
                 <Route path="admin" element={<Admin />} >
                     <Route index element={<DashBoard />} />
