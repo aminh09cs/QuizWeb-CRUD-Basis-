@@ -29,6 +29,49 @@ const ContentQuiz = (props) => {
         }
         setIndex(index + 1);
     }
+    const handleSubmit = () => {
+        let dataPayload = {
+            quizID: +quizID,
+            answers: []
+        }
+        let answers = []
+        if (dataQuiz && dataQuiz.length > 0) {
+            dataQuiz.map((item) => { //item = question
+                let questionId = item.quesID;
+                let userAnswerId = [];
+                item.answers.map((answer) => {
+                    if (answer.isSelected) {
+                        userAnswerId.push(answer.id);
+                    }
+                })
+                answers.push({
+                    questionId: +questionId,
+                    userAnswerId: userAnswerId
+                })
+            })
+            dataPayload.answers = answers;
+            console.log("final", dataPayload);
+        }
+    }
+    const handleCheckbox_2 = (answerId, questionId) => {
+        let dataQuizClone = _.cloneDeep(dataQuiz);
+        let question = dataQuizClone.find(item => +item.quesID === +questionId);
+        if (question && question.answers) {
+            let temp = question.answers.map(item => {
+                if (+item.id === +answerId) {
+                    item.isSelected = !item.isSelected;
+                }
+                return item;
+            });
+            question.answers = temp;
+        }
+        let idx = dataQuizClone.findIndex(item => +item.quesID === +questionId);
+        if (idx > -1) {
+            dataQuizClone[idx] = question;
+            setDataQuiz(dataQuizClone);
+        }
+
+    }
     const fletchQuestionQuiz = async () => {
         let res = await getDataQuiz(quizID);
         // console.log("data ori", res);
@@ -47,6 +90,7 @@ const ContentQuiz = (props) => {
                             quesImage = item.image;
                         }
                         answers.push(item.answers);
+                        item.answers.isSelected = false;
                     })
                     return { quesID: key, answers: answers, quesDescription: quesDescription, quesImage: quesImage }
                 }
@@ -68,6 +112,7 @@ const ContentQuiz = (props) => {
                                 dataQuiz[index] : []
                         }
                         index={index}
+                        handleCheckbox_2={handleCheckbox_2}
                     />
                 </div>
                 <div className="content-footer">
@@ -77,6 +122,7 @@ const ContentQuiz = (props) => {
                     {
                         index + 1 === dataQuiz.length ? <div></div> : <button className="btn-next" onClick={() => handleNext()}>NEXT</button>
                     }
+                    <button className="btn-submit btn btn-success" onClick={() => handleSubmit()}>Submit</button>
                 </div>
             </div>
             <div className="right-content">

@@ -6,7 +6,9 @@ const Question = (props) => {
         return (<>
         </>)
     }
-    console.log(props.data)
+    const handleCheckbox = (e, answerID, quesID) => {
+        props.handleCheckbox_2(answerID, quesID);
+    }
     return (
         <>
             {
@@ -24,7 +26,7 @@ const Question = (props) => {
 
             }
             <div className="content-question">
-                Question {props.index + 1}: {props.data.quesDescription}
+                Question {props.data.quesID}: {props.data.quesDescription}
             </div>
             <div className="content-answer">
                 {
@@ -39,10 +41,12 @@ const Question = (props) => {
                                     <input
                                         className="form-check-input"
                                         type="checkbox"
-                                        value=""
-                                        id="flexCheckDefault" />
+                                        onChange={(e) => handleCheckbox(e, answer.id, props.data.quesID)}
+                                        id="flexCheckDefault"
+                                        checked={answer.isSelected}
+                                    />
                                     <label className="form-check-label" htmlFor="flexCheckDefault">
-                                        {answer.description}
+                                        {index + 1}. {answer.description}
                                     </label>
                                 </div>
                             </div>

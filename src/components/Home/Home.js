@@ -1,6 +1,7 @@
 import Video from '../../Img/ocean_beach_coast_shore_turquoise_1082.mp4'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import './Home.scss'
 const Home = () => {
     const isAuthenticated = useSelector(state => state.user.isAuthenticated);
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const Home = () => {
                     }
                 </div>
             </div>
-            <video width="500px" height="500px" controls >
+            <video controls >
                 <source src={Video} type="video/mp4" />
             </video>
         </div>
